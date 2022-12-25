@@ -1,7 +1,7 @@
 Package: checkndr
 Type: Package
 Title: Data Quality Checks for the Nigeria National Data Repository (NDR) Patient-level Line Lists
-Version: 0.1.0
+Version: 0.0.0.900
 Authors@R: 
   c(person(given = "Stephen",
            family = "Balogun",
