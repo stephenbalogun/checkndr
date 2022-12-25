@@ -78,5 +78,3 @@ recency_dqa <- function(df) {
     "Viral load results", obs_vl_result
   )
 }
-
-

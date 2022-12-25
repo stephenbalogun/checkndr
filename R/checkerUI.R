@@ -10,7 +10,6 @@
 #'
 #' @examples NULL
 #'
-
 checkerUI <- function(id, .opts, .mult) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -71,4 +70,3 @@ checkerUI <- function(id, .opts, .mult) {
     )
   )
 }
-

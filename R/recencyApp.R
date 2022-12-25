@@ -9,7 +9,6 @@
 #' @examples NULL
 table_dqa <- function(df) {
   recency_dqa(df)
-
 }
 
 
@@ -41,18 +40,18 @@ request_line_list <- function(input, df) {
 #' @examples
 #' ## Only run examples in interactive R sessions
 #' if (interactive()) {
-#' recencyApp()
+#'   recencyApp()
 #' }
 #'
 recencyApp <- function(.theme = NULL) {
-
   ui <- shiny::fluidPage(
     theme = .theme %||% default_theme(),
     shiny::titlePanel("Recency Data Quality Checker"),
     checkerUI(
       "recency",
       .opts = recency_download_opts(),
-      .mult = FALSE)
+      .mult = FALSE
+    )
   )
 
   server <- function(input, output, session) {
@@ -64,9 +63,8 @@ recencyApp <- function(.theme = NULL) {
       lga_var = "facility_lga",
       facility_var = "facility",
       var_names = recency_var_names()
-      )
+    )
   }
 
   shiny::shinyApp(ui, server)
 }
-
