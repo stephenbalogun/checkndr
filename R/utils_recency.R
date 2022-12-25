@@ -1,6 +1,11 @@
 
-options(shiny.maxRequestSize = 500 * 1024^2)
-
+#' Download options
+#'
+#' @return
+#' @export
+#' @keywords internal
+#'
+#' @examples
 
 recency_download_opts <- function() {
   c(
@@ -13,6 +18,12 @@ recency_download_opts <- function() {
 
 
 
+#' Recency Line-list Variables
+#'
+#' @return
+#' @export
+#'
+#' @examples
 recency_var_names <- function() {
   c(
     "ip", "facility_state", "facility_lga", "facility", "client_state", "client_lga", "sex", "date_of_birth", "age",

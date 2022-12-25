@@ -44,6 +44,9 @@ request_line_list <- function(input, df) {
 #' }
 #'
 recencyApp <- function(.theme = NULL) {
+
+  options(shiny.maxRequestSize = 500 * 1024^2)
+
   ui <- shiny::fluidPage(
     theme = .theme %||% default_theme(),
     shiny::titlePanel("Recency Data Quality Checker"),
