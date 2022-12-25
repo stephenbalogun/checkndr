@@ -1,0 +1,36 @@
+Package: checkndr
+Type: Package
+Title: Data Quality Checks for the Nigeria National Data Repository (NDR) Patient-level Line Lists
+Version: 0.1.0
+Authors@R: 
+  c(person(given = "Stephen",
+           family = "Balogun",
+           role = c("aut", "cre"),
+           email = "stephentaiyebalogun@gmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0002-9928-3703")),
+            person(given = "Kehinde",
+           family = "Balogun",
+           role = "ctb"))
+Maintainer: Stephen Balogun <stephentaiyebalogun@gmail.com>
+Description: Performs data quality checks using the standard quality metrics on patient-level line-lists downloaded from the NDR
+      or similar platforms. Currenlty, it supports the Recency and Mortality Surveillance line-lists.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.0)
+Imports: 
+    bslib,
+    dplyr,
+    DT,
+    glue,
+    htmltools,
+    janitor,
+    lubridate,
+    readr,
+    readxl,
+    shiny,
+    shinyWidgets,
+    tibble,
+    tidyndr,
+    tidyselect
+RoxygenNote: 7.2.3
