@@ -34,3 +34,5 @@ Imports:
     tidyndr,
     tidyselect
 RoxygenNote: 7.2.3
+URL: https://github.com/stephenbalogun/checkndr
+BugReports: https://github.com/stephenbalogun/checkndr/issues
