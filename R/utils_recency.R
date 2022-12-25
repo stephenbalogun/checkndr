@@ -22,6 +22,7 @@ recency_download_opts <- function() {
 #'
 #' @return
 #' @export
+#' @keywords internal
 #'
 #' @examples
 recency_var_names <- function() {

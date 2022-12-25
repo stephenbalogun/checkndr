@@ -8,6 +8,14 @@
 \description{
 Performs data quality checks using the standard quality metrics on patient-level line-lists downloaded from the NDR or similar platforms. Currenlty, it supports the Recency and Mortality Surveillance line-lists.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/stephenbalogun/checkndr}
+  \item Report bugs at \url{https://github.com/stephenbalogun/checkndr/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Stephen Balogun \email{stephentaiyebalogun@gmail.com} (\href{https://orcid.org/0000-0002-9928-3703}{ORCID})
 

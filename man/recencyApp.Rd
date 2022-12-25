@@ -18,7 +18,7 @@ Start the Recency Data Quality Checker App
 \examples{
 ## Only run examples in interactive R sessions
 if (interactive()) {
-recencyApp()
+  recencyApp()
 }
 
 }
