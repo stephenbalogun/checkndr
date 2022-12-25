@@ -2,7 +2,6 @@
 #'
 #' Set default theme for the Shiny applications
 #'
-#' @export
 #' @keywords internal
 #' @return no return value
 #'

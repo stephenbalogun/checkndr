@@ -3,7 +3,6 @@
 #' @param input Selected indicator(s)
 #' @param df Line-list supplied
 #'
-#' @export
 #' @keywords internal
 #' @return dataframe
 #'

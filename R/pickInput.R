@@ -5,7 +5,6 @@
 #' @param opts select options
 #' @param mult boolean, should multiple selections be possible?
 #'
-#' @export
 #' @keywords internal
 #' @return selected input
 #'

@@ -6,7 +6,13 @@
 \usage{
 recency_var_names()
 }
+\value{
+NULL. Used for side effect
+}
 \description{
 Recency Line-list Variables
+}
+\examples{
+NULL
 }
 \keyword{internal}

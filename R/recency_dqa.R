@@ -2,7 +2,6 @@
 #'
 #' @param df dataframe of recency line-list
 #'
-#' @export
 #' @keywords internal
 #' @return table of data quality check
 #'

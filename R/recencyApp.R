@@ -2,7 +2,6 @@
 #'
 #' @param df dataframe of line list
 #'
-#' @export
 #' @keywords internal
 #' @return table of data quality check outcome
 #'
@@ -19,7 +18,6 @@ table_dqa <- function(df) {
 #' @param input Selected indicator(s)
 #' @param df Line-list supplied
 #'
-#' @export
 #' @keywords internal
 #' @return line-list of requested indicator(s)
 #'

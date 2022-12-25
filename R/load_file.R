@@ -4,7 +4,6 @@
 #' @param path location of file on the computer
 #' @param var_names variable names of the line-list
 #'
-#' @export
 #' @keywords internal
 #' @return dataframe of line-list
 #'

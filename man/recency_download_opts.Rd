@@ -6,7 +6,13 @@
 \usage{
 recency_download_opts()
 }
+\value{
+NULL. Used for side effect
+}
 \description{
 Download options
+}
+\examples{
+NULL
 }
 \keyword{internal}

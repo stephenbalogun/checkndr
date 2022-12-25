@@ -9,7 +9,6 @@
 #' @param var_names all the variable names to be extracted from the supplied data set
 #'
 #' @return server component
-#' @export
 #' @keywords internal
 #'
 #' @examples NULL

@@ -1,11 +1,10 @@
 
 #' Download options
 #'
-#' @return
-#' @export
+#' @return NULL. Used for side effect
 #' @keywords internal
 #'
-#' @examples
+#' @examples NULL
 
 recency_download_opts <- function() {
   c(
@@ -20,11 +19,10 @@ recency_download_opts <- function() {
 
 #' Recency Line-list Variables
 #'
-#' @return
-#' @export
+#' @return NULL. Used for side effect
 #' @keywords internal
 #'
-#' @examples
+#' @examples NULL
 recency_var_names <- function() {
   c(
     "ip", "facility_state", "facility_lga", "facility", "client_state", "client_lga", "sex", "date_of_birth", "age",

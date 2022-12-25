@@ -5,7 +5,6 @@
 #' @param .mult Logical, whether user can select multiple download options at a time
 #'
 #' @return user interface
-#' @export
 #' @keywords internal
 #'
 #' @examples NULL
