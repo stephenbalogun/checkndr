@@ -7,25 +7,25 @@
 #'
 #' @examples NULL
 recency_dqa <- function(df) {
-  obs_client_state <- glue::glue("{sum(is.na(df$client_state))} of patients did not have a documented state of residence")
+  obs_client_state <- glue::glue("{sum(is.na(df$client_state))} patients did not have a documented state of residence")
 
-  obs_client_lga <- glue::glue("{sum(is.na(df$client_lga))} of patients did not have a documented LGA of residence")
+  obs_client_lga <- glue::glue("{sum(is.na(df$client_lga))} patients did not have a documented LGA of residence")
 
-  obs_sex <- glue::glue("{sum(is.na(df$sex) + !df$sex %in% c('M', 'F', 'Male', 'Female', 'male', 'female'))} of patients did not have a documented gender or is neither 'Male' nor 'Female'")
+  obs_sex <- glue::glue("{sum(is.na(df$sex) + !df$sex %in% c('M', 'F', 'Male', 'Female', 'male', 'female'))} patients did not have a documented gender or is neither 'Male' nor 'Female'")
 
-  obs_age <- glue::glue("{sum(is.na(df$age)) + sum(df$age < 15, na.rm = TRUE)} of patients either did not have a documented age or the age documented is less than 15 years")
+  obs_age <- glue::glue("{sum(is.na(df$age)) + sum(df$age < 15, na.rm = TRUE)} patients either did not have a documented age or the age documented is less than 15 years")
 
-  obs_visit_date <- glue::glue("{sum(is.na(df$visit_date))} of patients did not have a documented visit date")
+  obs_visit_date <- glue::glue("{sum(is.na(df$visit_date))} patients did not have a documented visit date")
 
-  obs_hts_result <- glue::glue("{sum(!df$hts_result %in% c('R', 'Pos'))} of patients did not have a 'reactive' screening result")
+  obs_hts_result <- glue::glue("{sum(!df$hts_result %in% c('R', 'Pos'))} patients did not have a 'reactive' screening result")
 
-  obs_hts_confirmatory <- glue::glue("{sum(!df$hts_confirmatory_result %in% c('R', 'Pos', 'NR', 'Neg', 'Invalid'))} of patients did not have a documented confirmatory result")
+  obs_hts_confirmatory <- glue::glue("{sum(!df$hts_confirmatory_result %in% c('R', 'Pos', 'NR', 'Neg', 'Invalid'))} patients did not have a documented confirmatory result")
 
-  obs_hts_tie <- glue::glue("{sum(df$hts_confirmatory_result %in% c('NR', 'Neg') & !df$hts_tie_breaker_result %in% c('R', 'Pos'))} of patients with negative confirmatory result did not have a positive tie breaker")
+  obs_hts_tie <- glue::glue("{sum(df$hts_confirmatory_result %in% c('NR', 'Neg') & !df$hts_tie_breaker_result %in% c('R', 'Pos'))} patients with negative confirmatory result did not have a positive tie breaker")
 
-  obs_testing_point <- glue::glue("{sum(is.na(df$testing_point))} of patients did not have a documented HTS testing point")
+  obs_testing_point <- glue::glue("{sum(is.na(df$testing_point))} patients did not have a documented HTS testing point")
 
-  obs_opt_out <- glue::glue("{sum(is.na(df$opt_out))} of patients did not have a documented 'opt-out' status")
+  obs_opt_out <- glue::glue("{sum(is.na(df$opt_out))} patients did not have a documented 'opt-out' status")
 
   obs_recency_test <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date))} patients have a documented recency test but no date of testing for recency")
 
@@ -49,7 +49,7 @@ recency_dqa <- function(df) {
 
   obs_vl_sample <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & is.na(df$date_sample_collected))} patients were identified as 'Recent' but did not have their date of sample colllection documented")
 
-  obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$visit_date < max(df$visit_date, na.rm = TRUE) - lubridate::days(60) & is.na(df$date_of_viral_load_result))} patients with RTRI_RECENT results were identified over 2 months ago but are still without viral load result")
+  obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$visit_date < max(df$visit_date, na.rm = TRUE) - lubridate::days(42) & is.na(df$date_of_viral_load_result))} patients with RTRI_RECENT results were identified over 6 weeks ago but are still without viral load result")
 
   tibble::tribble(
     ~variables, ~observations,

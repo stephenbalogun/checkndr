@@ -52,7 +52,7 @@ recency_line_list <- function(input, df) {
     "Viral load result" = dplyr::filter(
       df, control_line %in% "Yes", verification_line %in% "Yes",
       !longterm_line %in% "Yes", viral_load_requested %in% "Yes",
-      visit_date < max(visit_date, na.rm = TRUE) - lubridate::days(60), is.na(date_of_viral_load_result)
+      visit_date < max(visit_date, na.rm = TRUE) - lubridate::days(42), is.na(date_of_viral_load_result)
     )
   )
 }
