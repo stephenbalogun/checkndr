@@ -12,6 +12,20 @@ table_dqa <- function(df) {
 
 
 
+#' Filter rows with Complete Valid Entries
+#'
+#' @param df dataframe of line list
+#'
+#' @keywords internal
+#' @return table of rows with valid entries in all cells
+#'
+#' @examples NULL
+filter_valid <- function(df) {
+  valid_cases(df)
+}
+
+
+
 
 #' Specify the Type of Line-list to be Requested
 #'

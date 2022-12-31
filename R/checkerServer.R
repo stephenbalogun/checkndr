@@ -110,6 +110,44 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
           )
       })
 
+
+      valid_entries <- shiny::reactive({
+        filter_valid(dt())
+      })
+
+      percent_valid <- shiny::reactive({
+        nrow(valid_entries()) / nrow(dt())
+      })
+
+
+      output$summarybox <- shiny::renderUI({
+        shiny::fluidRow(
+          summaryBox::summaryBox2(
+            "observations (rows)",
+            nrow(dt()),
+            width = 4,
+            icon = "fas fa-clipboard-list",
+            style = "info"
+          ),
+          summaryBox::summaryBox2(
+            "valid entries", nrow(valid_entries()),
+            width = 4,
+            icon = "fas fa-vial",
+            style = "success"
+          ),
+          summaryBox::summaryBox2(
+            "valid entries",
+            scales::percent(percent_valid(), accuracy = 1),
+            width = 4,
+            icon = "fas fa-yin-yang",
+            style = dplyr::if_else(percent_valid() < 0.95, "danger", "warning")
+          )
+
+        )
+
+      })
+
+
       output$table <- DT::renderDataTable({
         table_dqa(dt())
       })

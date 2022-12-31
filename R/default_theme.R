@@ -14,6 +14,7 @@ default_theme <- function() {
     base_font = bslib::font_google("Fira Sans"),
     heading_font = bslib::font_google("Pacifico"),
     accent = "red",
-    primary = "#971230"
+    primary = "#971230",
+    version = 4
   )
 }

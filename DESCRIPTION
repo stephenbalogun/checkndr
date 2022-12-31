@@ -28,8 +28,10 @@ Imports:
     lubridate,
     readr,
     readxl,
+    scales,
     shiny,
     shinyWidgets,
+    summaryBox,
     tibble,
     tidyndr,
     tidyselect
