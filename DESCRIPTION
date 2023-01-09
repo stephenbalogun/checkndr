@@ -31,10 +31,13 @@ Imports:
     scales,
     shiny,
     shinyWidgets,
-    summaryBox,
+    summaryBox (>= 0.1.0),
     tibble,
-    tidyndr,
+    tidyndr (>= 0.2.2),
     tidyselect
 RoxygenNote: 7.2.3
 URL: https://github.com/stephenbalogun/checkndr
 BugReports: https://github.com/stephenbalogun/checkndr/issues
+Remotes:  
+    deepanshu88/summaryBox,
+    stephenbalogun/tidyndr
