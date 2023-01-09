@@ -106,7 +106,8 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
             facility_state %in% input$state,
             facility_lga %in% input$lga,
             facility %in% input$facility,
-            dplyr::between(.data[[date_var]], input$period[[1]], input$period[[2]])
+            dplyr::between(.data[[date_var]], input$period[[1]], input$period[[2]]),
+            !is.na(opt_out)
           )
       })
 
@@ -123,7 +124,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       output$summarybox <- shiny::renderUI({
         shiny::fluidRow(
           summaryBox::summaryBox2(
-            "observations (rows)",
+            "persons had recency test",
             nrow(dt()),
             width = 4,
             icon = "fas fa-clipboard-list",
@@ -137,10 +138,12 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
           ),
           summaryBox::summaryBox2(
             "valid entries",
-            scales::percent(percent_valid(), accuracy = 1),
+            scales::percent(percent_valid(), accuracy = 0.1),
             width = 4,
             icon = "fas fa-yin-yang",
-            style = dplyr::if_else(percent_valid() < 0.95, "danger", "warning")
+            style = dplyr::case_when(percent_valid() < 0.95 ~ "danger",
+                                     dplyr::between(percent_valid(), 0.95, 0.999) ~ "warning",
+                                     percent_valid() >= 0.999 ~ "success")
           )
 
         )

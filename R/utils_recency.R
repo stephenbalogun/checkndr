@@ -9,7 +9,7 @@
 recency_download_opts <- function() {
   c(
     "Client state", "Client LGA", "Sex", "Age", "Visit date", "Screening result", "Confirmatory test",
-    "Tie breaker", "Testing point", "Opt out", "Recency test", "Recency number", "Control line",
+    "Tie breaker", "Testing point", "Recency test", "Recency number", "Control line",
     "Verification line", "Longterm line", "Interpreted longterm", "Interpreted recent", "Interpreted negative",
     "Interpreted invalid", "Viral load requested", "Viral load sample collection date", "Viral load result"
   )

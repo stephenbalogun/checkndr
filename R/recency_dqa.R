@@ -25,8 +25,6 @@ recency_dqa <- function(df) {
 
   obs_testing_point <- glue::glue("{sum(is.na(df$testing_point))} patients did not have a documented HTS testing point")
 
-  obs_opt_out <- glue::glue("{sum(is.na(df$opt_out))} patients did not have a documented 'opt-out' status")
-
   obs_recency_test <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date))} patients have a documented recency test but no date of testing for recency")
 
   obs_recency_number <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_number))} patients have a documented recency test but no recency number")
@@ -51,6 +49,8 @@ recency_dqa <- function(df) {
 
   obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$visit_date < max(df$visit_date, na.rm = TRUE) - lubridate::days(42) & is.na(df$date_of_viral_load_result))} patients with RTRI_RECENT results were identified over 6 weeks ago but are still without viral load result")
 
+  obs_partial_duplicates <- glue::glue("{nrow(df |>  janitor::get_dupes(sex, date_of_birth, facility, visit_date))} entries are partially duplicated with the same 'sex', 'date_of_birth', 'facility', 'visit_date' and 'HIV status'")
+
   tibble::tribble(
     ~variables, ~observations,
     "Client state", obs_client_state,
@@ -62,7 +62,6 @@ recency_dqa <- function(df) {
     "Confirmatory test", obs_hts_confirmatory,
     "Tie breaker test", obs_hts_tie,
     "HTS testing point", obs_testing_point,
-    "Opt out of recency", obs_opt_out,
     "Recency test", obs_recency_test,
     "Recency number", obs_recency_number,
     "Control line", obs_control_line,
@@ -74,6 +73,7 @@ recency_dqa <- function(df) {
     "Interpreted invalid", obs_interpretation_invalid,
     "Viral load requested", obs_vl_request,
     "Viral load sample date", obs_vl_sample,
-    "Viral load results", obs_vl_result
+    "Viral load results", obs_vl_result,
+    "Partial duplicates", obs_partial_duplicates
   )
 }

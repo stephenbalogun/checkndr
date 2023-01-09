@@ -18,7 +18,6 @@ invalid_cases <- function(df){
         !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid") |
         hts_confirmatory_result %in% c("NR", "Neg") & !hts_tie_breaker_result %in% c("R", "Pos") |
         is.na(testing_point) |
-        is.na(opt_out) |
         recency_test_name %in% c("Asante", "AS") & is.na(recency_test_date) |
         recency_test_name %in% c("Asante", "AS") & is.na(recency_number) |
         recency_test_name %in% c("Asante", "AS") & !control_line %in% c("Yes", "No") |
@@ -39,11 +38,24 @@ invalid_cases <- function(df){
 
 utils::globalVariables(
   c(
-    "client_state", "client_lga", "sex", "age", "visit_date",
-    "hts_result", "hts_confirmatory_result", "hts_tie_breaker_result",
-    "testing_point", "opt_out", "recency_test_name", "recency_number",
-    "recency_test_date", "control_line", "verification_line",
-    "longterm_line", "recency_interpretation", "viral_load_requested",
-    "date_sample_collected", "date_of_viral_load_result"
+    "client_state",
+    "client_lga",
+    "sex",
+    "age",
+    "visit_date",
+    "hts_result",
+    "hts_confirmatory_result",
+    "hts_tie_breaker_result",
+    "testing_point",
+    "recency_test_name",
+    "recency_number",
+    "recency_test_date",
+    "control_line",
+    "verification_line",
+    "longterm_line",
+    "recency_interpretation",
+    "viral_load_requested",
+    "date_sample_collected",
+    "date_of_viral_load_result"
   )
 )
