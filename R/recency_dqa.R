@@ -49,7 +49,7 @@ recency_dqa <- function(df) {
 
   obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$visit_date < max(df$visit_date, na.rm = TRUE) - lubridate::days(42) & is.na(df$date_of_viral_load_result))} patients with RTRI_RECENT results were identified over 6 weeks ago but are still without viral load result")
 
-  obs_partial_duplicates <- glue::glue("{nrow(df |>  janitor::get_dupes(sex, date_of_birth, facility, visit_date))} entries are partially duplicated with the same 'sex', 'date_of_birth', 'facility', 'visit_date' and 'HIV status'")
+  obs_partial_duplicates <- glue::glue("{nrow(df |>  janitor::get_dupes(sex, date_of_birth, facility, visit_date))} entries are at least partially duplicated with the same 'sex', 'date_of_birth', 'facility', 'visit_date' and 'HIV status'")
 
   tibble::tribble(
     ~variables, ~observations,
