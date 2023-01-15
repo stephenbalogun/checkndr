@@ -9,49 +9,49 @@
 #' @examples NULL
 recency_line_list <- function(input, df) {
   switch(input,
-    "Client state" = dplyr::filter(df, is.na(client_state)),
-    "Client LGA" = dplyr::filter(df, is.na(client_lga)),
-    "Sex" = dplyr::filter(df, is.na(sex) | !sex %in% c("Male", "Female", "M", "F", "male", "female", "m", "f")),
-    "Age" = dplyr::filter(df, is.na(age) | age < 15),
-    "Visit date" = dplyr::filter(df, is.na(visit_date)),
-    "Screening result" = dplyr::filter(df, !hts_result %in% c("R", "Pos")),
-    "Confirmatory test" = dplyr::filter(df, !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid")),
-    "Tie breaker" = dplyr::filter(df, hts_confirmatory_result %in% c("NR", "Neg"), !hts_tie_breaker_result %in% c("R", "Pos")),
-    "Testing point" = dplyr::filter(df, is.na(testing_point)),
-    "Recency test" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS"), is.na(recency_test_date)),
-    "Recency number" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS"), is.na(recency_number)),
-    "Control line" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS"), !control_line %in% c("Yes", "No")),
-    "Verification line" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS"), !verification_line %in% c("Yes", "No")),
-    "Longterm line" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS"), !longterm_line %in% c("Yes", "No")),
-    "Interpreted longterm" = dplyr::filter(
-      df, control_line %in% "Yes", verification_line %in% "Yes",
-      longterm_line %in% "Yes", !recency_interpretation %in% "LongTerm"
+    "Client state" = subset(df, is.na(client_state)),
+    "Client LGA" = subset(df, is.na(client_lga)),
+    "Sex" = subset(df, is.na(sex) | !sex %in% c("Male", "Female", "M", "F", "male", "female", "m", "f")),
+    "Age" = subset(df, is.na(age) | age < 15),
+    "Visit date" = subset(df, is.na(visit_date)),
+    "Screening result" = subset(df, !hts_result %in% c("R", "Pos")),
+    "Confirmatory test" = subset(df, !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid")),
+    "Tie breaker" = subset(df, hts_confirmatory_result %in% c("NR", "Neg") & !hts_tie_breaker_result %in% c("R", "Pos")),
+    "Testing point" = subset(df, is.na(testing_point)),
+    "Recency test" = subset(df, recency_test_name %in% c("Asante", "AS") & is.na(recency_test_date)),
+    "Recency number" = subset(df, recency_test_name %in% c("Asante", "AS") & is.na(recency_number)),
+    "Control line" = subset(df, recency_test_name %in% c("Asante", "AS") & !control_line %in% c("Yes", "No")),
+    "Verification line" = subset(df, recency_test_name %in% c("Asante", "AS") & !verification_line %in% c("Yes", "No")),
+    "Longterm line" = subset(df, recency_test_name %in% c("Asante", "AS") & !longterm_line %in% c("Yes", "No")),
+    "Interpreted longterm" = subset(
+      df, control_line %in% "Yes" & verification_line %in% "Yes" &
+      longterm_line %in% "Yes" & !recency_interpretation %in% "LongTerm"
     ),
-    "Interpreted recent" = dplyr::filter(
-      df, control_line %in% "Yes", verification_line %in% "Yes",
-      !longterm_line %in% "Yes", !recency_interpretation %in% "Recent"
+    "Interpreted recent" = subset(
+      df, control_line %in% "Yes" & verification_line %in% "Yes" &
+      !longterm_line %in% "Yes" & !recency_interpretation %in% "Recent"
     ),
-    "Interpreted negative" = dplyr::filter(
-      df, control_line %in% "Yes", !verification_line %in% "Yes",
-      !longterm_line %in% "Yes", !recency_interpretation %in% "Negative"
+    "Interpreted negative" = subset(
+      df, control_line %in% "Yes" & !verification_line %in% "Yes" *
+      !longterm_line %in% "Yes" & !recency_interpretation %in% "Negative"
     ),
-    "Interpreted invalid" = dplyr::filter(df, recency_test_name %in% c("Asante", "AS") & !control_line %in% "Yes" &
+    "Interpreted invalid" = subset(df, recency_test_name %in% c("Asante", "AS") & !control_line %in% "Yes" &
       !recency_interpretation %in% "Invalid" | control_line %in% "Yes" &
       !verification_line %in% "Yes" & longterm_line %in% "Yes" &
       !recency_interpretation %in% "Invalid"),
-    "Viral load requested" = dplyr::filter(
-      df, control_line %in% "Yes", verification_line %in% "Yes",
-      !longterm_line %in% "Yes", !viral_load_requested %in% "Yes"
+    "Viral load requested" = subset(
+      df, control_line %in% "Yes" & verification_line %in% "Yes" &
+      !longterm_line %in% "Yes" & !viral_load_requested %in% "Yes"
     ),
-    "Viral load sample collection date" = dplyr::filter(
-      df, control_line %in% "Yes", verification_line %in% "yes",
-      !longterm_line %in% "Yes", viral_load_requested %in% "Yes",
+    "Viral load sample collection date" = subset(
+      df, control_line %in% "Yes" & verification_line %in% "yes" &
+      !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
       is.na(date_sample_collected)
     ),
-    "Viral load result" = dplyr::filter(
-      df, control_line %in% "Yes", verification_line %in% "Yes",
-      !longterm_line %in% "Yes", viral_load_requested %in% "Yes",
-      visit_date < max(visit_date, na.rm = TRUE) - lubridate::days(42), is.na(date_of_viral_load_result)
+    "Viral load result" = subset(
+      df, control_line %in% "Yes" & verification_line %in% "Yes" &
+      !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
+      visit_date < max(visit_date, na.rm = TRUE) - 42 & is.na(date_of_viral_load_result)
     ),
     "Partial duplicates" = janitor::get_dupes(df, sex, date_of_birth, facility, visit_date)
   )
