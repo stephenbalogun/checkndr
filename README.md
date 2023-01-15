@@ -61,7 +61,7 @@ theme <- bslib::bs_theme(
 )
 
 recencyApp(
-    .theme = theme
+  .theme = theme
 )
 ```
 

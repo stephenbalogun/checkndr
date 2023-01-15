@@ -6,7 +6,7 @@
 #' @return table of rows with invalid entries in all cells
 #'
 #' @examples NULL
-invalid_cases <- function(df){
+invalid_cases <- function(df) {
   df |>
     dplyr::filter(
       is.na(client_state) |
@@ -26,7 +26,7 @@ invalid_cases <- function(df){
         control_line %in% "Yes" & verification_line %in% "Yes" & longterm_line %in% "Yes" & !recency_interpretation %in% "LongTerm" |
         control_line %in% "Yes" & verification_line %in% "Yes" & !longterm_line %in% "Yes" & !recency_interpretation %in% "Recent" |
         control_line %in% "Yes" & !verification_line %in% "Yes" & !longterm_line %in% "Yes" &
-        !recency_interpretation %in% "Negative" |
+          !recency_interpretation %in% "Negative" |
         recency_test_name %in% c("Asante", "AS") & !control_line %in% "Yes" & !recency_interpretation %in% "Invalid" |
         control_line %in% "Yes" & !verification_line %in% "Yes" & longterm_line %in% "Yes" & !recency_interpretation %in% "Invalid" |
         control_line %in% "Yes" & verification_line %in% "Yes" & !longterm_line %in% "Yes" & !viral_load_requested %in% "Yes" |

@@ -56,7 +56,6 @@ request_line_list <- function(input, df) {
 #' }
 #'
 recencyApp <- function(.theme = NULL) {
-
   options(shiny.maxRequestSize = 500 * 1024^2)
 
   ui <- shiny::fluidPage(
@@ -65,7 +64,7 @@ recencyApp <- function(.theme = NULL) {
     checkerUI(
       "recency",
       .opts = recency_download_opts(),
-      .mult = FALSE
+      .mult = TRUE
     )
   )
 

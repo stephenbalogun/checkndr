@@ -66,7 +66,7 @@ checkerUI <- function(id, .opts, .mult) {
       shiny::mainPanel(
         shiny::uiOutput(
           shiny::NS(id, "summarybox")
-          ),
+        ),
         shiny::fluidRow(
           DT::dataTableOutput(shiny::NS(id, "table"))
         )

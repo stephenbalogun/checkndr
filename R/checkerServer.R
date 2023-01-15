@@ -141,13 +141,13 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
             scales::percent(percent_valid(), accuracy = 0.1),
             width = 4,
             icon = "fas fa-yin-yang",
-            style = dplyr::case_when(percent_valid() < 0.95 ~ "danger",
-                                     dplyr::between(percent_valid(), 0.95, 0.999) ~ "warning",
-                                     percent_valid() >= 0.999 ~ "success")
+            style = dplyr::case_when(
+              percent_valid() < 0.95 ~ "danger",
+              dplyr::between(percent_valid(), 0.95, 0.999) ~ "warning",
+              percent_valid() >= 0.999 ~ "success"
+            )
           )
-
         )
-
       })
 
 
@@ -157,18 +157,18 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
 
       # download outputs ----------------------------------------------------------------------------------------------------------
       download_data <- shiny::reactive({
-        request_line_list(input$indicator, dt())
+        request_line_list(dt(), input$indicator)
       })
 
       output$download <- downloadHandler(
         filename = function() {
-          paste(Sys.Date(), " ", input$indicator,
-            " line-listing", ".csv",
+          paste(Sys.Date(), " ", paste(input$indicator, collapse = "_"),
+            " line-listing", ".xlsx",
             sep = ""
           )
         },
         content = function(file) {
-          readr::write_csv(download_data(), file, na = "")
+          write_results(download_data(), f_name = file)
         }
       )
     }

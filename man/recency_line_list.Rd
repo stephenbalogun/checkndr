@@ -4,12 +4,12 @@
 \alias{recency_line_list}
 \title{Generate Line-list of Selected Indicators}
 \usage{
-recency_line_list(input, df)
+recency_line_list(df, input)
 }
 \arguments{
-\item{input}{Selected indicator(s)}
-
 \item{df}{Line-list supplied}
+
+\item{input}{Selected indicator(s)}
 }
 \value{
 dataframe

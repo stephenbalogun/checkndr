@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils_recency.R
 \name{recency_download_opts}
 \alias{recency_download_opts}
-\title{Download options}
+\title{Recency Download Options}
 \usage{
 recency_download_opts()
 }
@@ -10,9 +10,10 @@ recency_download_opts()
 NULL. Used for side effect
 }
 \description{
-Download options
+Recency Download Options
 }
 \examples{
 NULL
+
 }
 \keyword{internal}
