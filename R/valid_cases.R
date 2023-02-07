@@ -42,6 +42,8 @@
 valid_cases <- function(df) {
   df |>
     dplyr::filter(
+      !is.na(recency_test_name),
+      !is.na(opt_out),
       !is.na(client_state),
       !is.na(client_lga),
       sex %in% c("Male", "Female", "M", "F", "male", "female", "m", "f"),
@@ -52,7 +54,7 @@ valid_cases <- function(df) {
       !is.na(opt_out),
       !is.na(testing_point),
       recency_test_name %in% c("Asante", "AS"),
-      !is.na(recency_test_date),
+      !is.na(recency_test_date) | recency_test_date >= visit_date,
       !is.na(recency_number),
       control_line %in% c("Yes", "No"),
       verification_line %in% c("Yes", "No"),

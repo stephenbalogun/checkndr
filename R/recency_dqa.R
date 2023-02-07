@@ -28,7 +28,9 @@ recency_dqa <- function(df) {
 
   obs_testing_point <- glue::glue("{sum(is.na(df$testing_point))} patients did not have a documented HTS testing point")
 
-  obs_recency_test <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date))} patients have a documented recency test but no date of testing for recency")
+  obs_recency_test_name <- glue::glue("{sum(!df$recency_test_name %in% c('Asante', 'AS'))} patients did not opt out of recency testing but have no recency test name}")
+
+  obs_recency_test_date <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date), df$recency_test_name %in% c('Asante', 'AS') & df$recency_test_date < df$visit_date, na.rm = TRUE)} patients have a documented recency test but no date of testing for recency or testing date is before visit date")
 
   obs_recency_number <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_number))} patients have a documented recency test but no recency number")
 
@@ -66,7 +68,8 @@ recency_dqa <- function(df) {
     "Confirmatory test", obs_hts_confirmatory,
     "Tie breaker test", obs_hts_tie,
     "HTS testing point", obs_testing_point,
-    "Recency test", obs_recency_test,
+    "Recency test name", obs_recency_test_name,
+    "Recency test date", obs_recency_test_date,
     "Recency number", obs_recency_number,
     "Control line", obs_control_line,
     "Verification line", obs_verification_line,
