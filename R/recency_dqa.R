@@ -7,6 +7,9 @@
 #'
 #' @examples NULL
 recency_dqa <- function(df) {
+
+  obs_opt_out <- glue::glue("{sum(is.na(df$opt_out) & !is.na(df$recency_test_name))} patients did not have a documented `opt_out` status but had Asante recency test done")
+
   obs_client_state <- glue::glue("{sum(is.na(df$client_state))} patients did not have a documented state of residence")
 
   obs_client_lga <- glue::glue("{sum(is.na(df$client_lga))} patients did not have a documented LGA of residence")
@@ -53,6 +56,7 @@ recency_dqa <- function(df) {
 
   tibble::tribble(
     ~variables, ~observations,
+    "Opt out", obs_opt_out,
     "Client state", obs_client_state,
     "Client LGA", obs_client_lga,
     "Sex", obs_sex,

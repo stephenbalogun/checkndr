@@ -12,6 +12,10 @@ recency_line_list <- function(df, input) {
 
   for (i in seq_along(out)) {
     out[[i]] <- switch(input[[i]],
+      "Opt out" = subset(
+        df,
+        is.na(opt_out) & !is.na(recency_test_name)
+      ),
       "Client state" = subset(
         df,
         is.na(client_state)

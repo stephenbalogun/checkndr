@@ -107,7 +107,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
             facility_lga %in% input$lga,
             facility %in% input$facility,
             dplyr::between(.data[[date_var]], input$period[[1]], input$period[[2]]),
-            !is.na(opt_out)
+            !is.na(opt_out) | is.na(opt_out) & !is.na(recency_test_name)
           )
       })
 
