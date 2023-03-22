@@ -125,13 +125,13 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
         shiny::fluidRow(
           summaryBox::summaryBox2(
             "persons had recency test",
-            nrow(dt()),
+            scales::comma(nrow(dt())),
             width = 4,
             icon = "fas fa-clipboard-list",
             style = "info"
           ),
           summaryBox::summaryBox2(
-            "valid entries", nrow(valid_entries()),
+            "valid entries", scales::comma(nrow(valid_entries())),
             width = 4,
             icon = "fas fa-vial",
             style = "success"
