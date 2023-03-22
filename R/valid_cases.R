@@ -85,7 +85,7 @@ valid_cases <- function(df) {
           !is.na(date_sample_collected),
       ifelse(
         recency_interpretation %in% "Recent" &
-          visit_date + lubridate::days(42) < max(visit_date, na.rm = TRUE),
+          visit_date + lubridate::days(28) < max(visit_date, na.rm = TRUE),
         !is.na(date_of_viral_load_result),
         is.na(date_of_viral_load_result)
       )
