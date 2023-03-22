@@ -99,47 +99,61 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       })
 
       # display table -------------------------------------------------------------------------------------------------------------
-      dt <- shiny::eventReactive(input$update, {
+      eligible <- shiny::eventReactive(input$update, {
         data() |>
           dplyr::filter(
             ip %in% input$partner,
             facility_state %in% input$state,
             facility_lga %in% input$lga,
             facility %in% input$facility,
-            dplyr::between(.data[[date_var]], input$period[[1]], input$period[[2]]),
-            !is.na(opt_out) | is.na(opt_out) & !is.na(recency_test_name)
+            dplyr::between(.data[[date_var]], input$period[[1]], input$period[[2]])
+          )
+      })
+
+      recency_test <- shiny::reactive({
+        dplyr::filter(
+          eligible(),
+          !is.na(opt_out) | is.na(opt_out) & !is.na(recency_test_name)
           )
       })
 
 
+
       valid_entries <- shiny::reactive({
-        filter_valid(dt())
+        filter_valid(recency_test())
       })
 
       percent_valid <- shiny::reactive({
-        nrow(valid_entries()) / nrow(dt())
+        nrow(valid_entries()) / nrow(recency_test())
       })
 
 
       output$summarybox <- shiny::renderUI({
         shiny::fluidRow(
           summaryBox::summaryBox2(
+            "eligible persons",
+            scales::comma(nrow(eligible())),
+            width = 3,
+            icon = "fas fa-person",
+            style = "primary"
+          ),
+          summaryBox::summaryBox2(
             "persons had recency test",
-            scales::comma(nrow(dt())),
-            width = 4,
+            scales::comma(nrow(recency_test())),
+            width = 3,
             icon = "fas fa-clipboard-list",
             style = "info"
           ),
           summaryBox::summaryBox2(
-            "valid entries", scales::comma(nrow(valid_entries())),
-            width = 4,
+            "valid recency entries", scales::comma(nrow(valid_entries())),
+            width = 3,
             icon = "fas fa-vial",
             style = "success"
           ),
           summaryBox::summaryBox2(
             "valid entries",
             scales::percent(percent_valid(), accuracy = 0.1),
-            width = 4,
+            width = 3,
             icon = "fas fa-yin-yang",
             style = dplyr::case_when(
               percent_valid() < 0.95 ~ "danger",
@@ -152,12 +166,12 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
 
 
       output$table <- DT::renderDataTable({
-        table_dqa(dt())
+        table_dqa(recency_test())
       })
 
       # download outputs ----------------------------------------------------------------------------------------------------------
       download_data <- shiny::reactive({
-        request_line_list(dt(), input$indicator)
+        request_line_list(recency_test(), input$indicator)
       })
 
       output$download <- downloadHandler(
