@@ -127,7 +127,9 @@ dqa_recency <- function(df) {
 
   obs_recency_test_name <- glue::glue("{sum(!df$recency_test_name %in% c('Asante', 'AS'))} clients did not opt out of recency testing but have no recency test name}")
 
-  obs_recency_test_date <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date), df$recency_test_name %in% c('Asante', 'AS') & df$recency_test_date < df$visit_date, na.rm = TRUE)} clients have a documented recency test but no date of testing for recency or testing date is before visit date")
+  obs_recency_test_date <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_test_date), na.rm = TRUE)} clients have a documented recency test but no date of testing for recency")
+
+  obs_test_before_visit <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & df$recency_test_date < df$visit_date, na.rm = TRUE)} clients had their recency test date preceding the service visit date")
 
   obs_recency_number <- glue::glue("{sum(df$recency_test_name %in% c('Asante', 'AS') & is.na(df$recency_number))} clients have a documented recency test but no recency number")
 
@@ -160,6 +162,7 @@ dqa_recency <- function(df) {
     "Opt out", obs_opt_out,
     "Recency test name", obs_recency_test_name,
     "Recency test date", obs_recency_test_date,
+    "Recency date date before visit date", obs_test_before_visit,
     "Recency number", obs_recency_number,
     "Valid recency number",  obs_valid_recency_number,
     "Control line", obs_control_line,
