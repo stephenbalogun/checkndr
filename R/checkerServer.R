@@ -164,9 +164,16 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
         )
       })
 
+      table_pos <- shiny::reactive({
+        table_dqa_pos(hts_pos())
+      })
+
+      table_recency <- shiny::reactive({
+        table_dqa_recency(recency_test())
+      })
 
       output$table <- DT::renderDataTable({
-        table_dqa(recency_test())
+        dplyr::bind_rows(table_pos(), table_recency())
       })
 
       # download outputs ----------------------------------------------------------------------------------------------------------

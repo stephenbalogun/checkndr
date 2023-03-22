@@ -6,10 +6,14 @@
 #' @return table of data quality check outcome
 #'
 #' @examples NULL
-table_dqa <- function(df) {
-  recency_dqa(df)
+table_dqa_pos <- function(df) {
+  dqa_pos(df)
 }
 
+
+table_dqa_recency <- function(df) {
+  dqa_recency(df)
+}
 
 
 #' Filter rows with Complete Valid Entries
