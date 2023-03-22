@@ -59,15 +59,21 @@ recency_line_list <- function(df, input) {
       "Recency test date" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
-          is.na(recency_test_date) |
-          recency_test_name %in% c("Asante", "AS") &
-          recency_test_date < visit_date
+          recency_test_name %in% c("Asante", "AS")  & is.na(recency_test_date)
         ),
+      "Recency test before visit date" = subset(
+        df,
+       recency_test_date < visit_date
+      ),
       "Recency number" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           is.na(recency_number)
         ),
+      "Invalid recency number" = subset(
+        df,
+        !stringr::str_detect(recency_number, '[:alpha:]{2}[:digit:]{8}')
+      ),
       "Control line" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
