@@ -99,7 +99,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       })
 
       # display table -------------------------------------------------------------------------------------------------------------
-      eligible <- shiny::eventReactive(input$update, {
+      hts_pos <- shiny::eventReactive(input$update, {
         data() |>
           dplyr::filter(
             ip %in% input$partner,
@@ -112,7 +112,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
 
       recency_test <- shiny::reactive({
         dplyr::filter(
-          eligible(),
+          hts_pos(),
           !is.na(opt_out) | is.na(opt_out) & !is.na(recency_test_name)
           )
       })
@@ -131,14 +131,14 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       output$summarybox <- shiny::renderUI({
         shiny::fluidRow(
           summaryBox::summaryBox2(
-            "eligible persons",
-            scales::comma(nrow(eligible())),
+            "positive 15+ years",
+            scales::comma(nrow(hts_pos())),
             width = 3,
             icon = "fas fa-person",
             style = "primary"
           ),
           summaryBox::summaryBox2(
-            "persons had recency test",
+            "recency test",
             scales::comma(nrow(recency_test())),
             width = 3,
             icon = "fas fa-clipboard-list",
