@@ -56,6 +56,7 @@ valid_cases <- function(df) {
       recency_test_name %in% c("Asante", "AS"),
       !is.na(recency_test_date) | recency_test_date >= visit_date,
       !is.na(recency_number),
+      stringr::str_detect(recency_number, "[:alpha:]{2}[:digit:]{8}"),
       control_line %in% c("Yes", "No"),
       verification_line %in% c("Yes", "No"),
       longterm_line %in% c("Yes", "No"),
