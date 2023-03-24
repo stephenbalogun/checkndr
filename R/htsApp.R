@@ -4,7 +4,7 @@
 #' @param .theme customise the appearance of your Shiny app. This can be done using the `bslib::bs_theme()` function.
 #'
 #' @return HTS data quality app
-#' @export htsApp
+#' @keywords internal
 #'
 #' @examples
 #' ## Only run examples in interactive R sessions
