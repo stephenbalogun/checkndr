@@ -133,7 +133,7 @@ recency_line_list <- function(df, input) {
         recency_test_name %in% c("Asante", "AS") &
           control_line %in% "Yes" & verification_line %in% "Yes" &
           !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
-          recency_test_date < max(recency_test_date, na.rm = TRUE) - 42 & is.na(date_of_viral_load_result)
+          recency_test_date < max(recency_test_date, na.rm = TRUE) - 28 & is.na(date_of_viral_load_result)
       ),
       "Partial duplicates" = janitor::get_dupes(df, sex, date_of_birth, facility, visit_date)
     )
