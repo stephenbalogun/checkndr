@@ -34,6 +34,10 @@ recency_line_list <- function(df, input) {
         is.na(age) |
           age < 15
         ),
+      "Visit date" = subset(
+        df,
+        is.na(visit_date)
+      ),
       "Screening result" = subset(
         df,
         !hts_result %in% c("R", "Pos")
