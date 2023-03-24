@@ -15,7 +15,4 @@ table of data quality check
 \description{
 Perform Recency Data Quality Check
 }
-\examples{
-NULL
-}
 \keyword{internal}

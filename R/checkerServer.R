@@ -114,7 +114,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
         dplyr::filter(
           hts_pos(),
           !is.na(opt_out) | is.na(opt_out) & !is.na(recency_test_name)
-          )
+        )
       })
 
 
@@ -179,27 +179,19 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       # download outputs ----------------------------------------------------------------------------------------------------------
 
       download_one <- shiny::reactive({
-
         if (any(opts_one() %in% input$indicator)) {
-
           request_line_list(hts_pos(), opts_one()[opts_one() %in% input$indicator])
-
         }
-
       })
 
-        download_two <- shiny::reactive({
-
-          if (any(opts_two() %in%  input$indicator)) {
-
-            request_line_list(recency_test(), opts_two()[opts_two() %in% input$indicator])
-
-          }
-
-        })
+      download_two <- shiny::reactive({
+        if (any(opts_two() %in% input$indicator)) {
+          request_line_list(recency_test(), opts_two()[opts_two() %in% input$indicator])
+        }
+      })
 
       download_data <- shiny::reactive({
-       c(download_one(), download_two())
+        c(download_one(), download_two())
       })
 
       output$download <- downloadHandler(

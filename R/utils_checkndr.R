@@ -1,4 +1,3 @@
-
 #' Recency Download Options
 #'
 #' @return NULL. Used for side effect
@@ -6,15 +5,16 @@
 #'
 #' @examples NULL
 #'
-
 recency_download_opts <- function() {
   c(opts_one(), opts_two())
 }
 
 
-opts_one <-  function() {
-  c("Client state", "Client LGA", "Sex", "Age", "Visit date", "Screening result", "Confirmatory test",
-    "Tie breaker", "Testing point")
+opts_one <- function() {
+  c(
+    "Client state", "Client LGA", "Sex", "Age", "Visit date", "Screening result", "Confirmatory test",
+    "Tie breaker", "Testing point"
+  )
 }
 
 opts_two <- function() {
@@ -57,7 +57,7 @@ recency_var_names <- function() {
 hts_download_opts <- function() {
   c(
     "Client state", "Client LGA", "Sex", "Age", "Visit date", "First time visit", "Retesting for verification",
-    "Session type", "Referred from", "Marital status", "Children under five",  "Screening result", "Confirmatory test",
+    "Session type", "Referred from", "Marital status", "Children under five", "Screening result", "Confirmatory test",
     "Tie breaker", "Testing point", "Recency test", "Recency number", "HTS setting", "Consent",
     "Control line", "Verification line", "Longterm line", "Interpreted longterm", "Interpreted recent",
     "Post test counseling", "Interpreted negative", "Interpreted invalid", "Recency result", "Recency interpretation",

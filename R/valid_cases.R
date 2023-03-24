@@ -1,4 +1,3 @@
-
 #' Check for Number of rows with Valid Entries
 #'
 #' @param df dataframe of line list
@@ -65,23 +64,23 @@ valid_cases <- function(df) {
         longterm_line %in% "Yes" &
         recency_interpretation %in% "LongTerm" |
         control_line %in% "Yes" &
-        verification_line %in% "Yes" &
-        longterm_line %in% "No" &
-        recency_interpretation %in% "Recent" |
+          verification_line %in% "Yes" &
+          longterm_line %in% "No" &
+          recency_interpretation %in% "Recent" |
         control_line %in% "Yes" &
-        verification_line %in% "No" &
-        longterm_line %in% "No" &
-        recency_interpretation %in% "Negative" |
+          verification_line %in% "No" &
+          longterm_line %in% "No" &
+          recency_interpretation %in% "Negative" |
         control_line %in% "No" &
-        recency_interpretation %in% "Invalid" |
+          recency_interpretation %in% "Invalid" |
         control_line %in% "Yes" &
-        verification_line %in% "No" &
-        longterm_line %in% "Yes" &
-        recency_interpretation %in% "Invalid" |
+          verification_line %in% "No" &
+          longterm_line %in% "Yes" &
+          recency_interpretation %in% "Invalid" |
         control_line %in% "Yes" &
-        verification_line %in% "Yes" &
-        longterm_line %in% "No" &
-        viral_load_requested %in% "Yes" &
+          verification_line %in% "Yes" &
+          longterm_line %in% "No" &
+          viral_load_requested %in% "Yes" &
           !is.na(date_sample_collected),
       ifelse(
         recency_interpretation %in% "Recent" &

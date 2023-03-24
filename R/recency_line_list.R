@@ -19,21 +19,21 @@ recency_line_list <- function(df, input) {
       "Client state" = subset(
         df,
         is.na(client_state)
-        ),
+      ),
       "Client LGA" = subset(
         df,
         is.na(client_lga)
-        ),
+      ),
       "Sex" = subset(
         df,
         is.na(sex) |
           !sex %in% c("Male", "Female", "M", "F", "male", "female", "m", "f")
-        ),
+      ),
       "Age" = subset(
         df,
         is.na(age) |
           age < 15
-        ),
+      ),
       "Visit date" = subset(
         df,
         is.na(visit_date)
@@ -41,58 +41,59 @@ recency_line_list <- function(df, input) {
       "Screening result" = subset(
         df,
         !hts_result %in% c("R", "Pos")
-        ),
+      ),
       "Confirmatory test" = subset(
         df,
         hts_result %in% c("R", "Pos") &
           !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid")
-        ),
+      ),
       "Tie breaker" = subset(
         df,
         hts_result %in% c("R", "Pos") &
           hts_confirmatory_result %in% c("NR", "Neg") &
-          !hts_tie_breaker_result %in% c("R", "Pos")),
+          !hts_tie_breaker_result %in% c("R", "Pos")
+      ),
       "Testing point" = subset(
         df,
         is.na(testing_point)
-        ),
+      ),
       "Recency test name" = subset(
         df,
         !recency_test_name %in% c("Asante", "AS")
-        ),
+      ),
       "Recency test date" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
-          recency_test_name %in% c("Asante", "AS")  & is.na(recency_test_date)
-        ),
+          recency_test_name %in% c("Asante", "AS") & is.na(recency_test_date)
+      ),
       "Recency test before visit date" = subset(
         df,
-       recency_test_date < visit_date
+        recency_test_date < visit_date
       ),
       "Recency number" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           is.na(recency_number)
-        ),
+      ),
       "Invalid recency number" = subset(
         df,
-        !stringr::str_detect(recency_number, '[:alpha:]{2}[:digit:]{8}')
+        !stringr::str_detect(recency_number, "[:alpha:]{2}[:digit:]{8}")
       ),
       "Control line" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           !control_line %in% c("Yes", "No")
-        ),
+      ),
       "Verification line" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           !verification_line %in% c("Yes", "No")
-        ),
+      ),
       "Longterm line" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           !longterm_line %in% c("Yes", "No")
-        ),
+      ),
       "Interpreted longterm" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
@@ -114,7 +115,7 @@ recency_line_list <- function(df, input) {
         recency_test_name %in% c("Asante", "AS") &
           !control_line %in% "Yes" & !recency_interpretation %in% "Invalid" |
           control_line %in% "Yes" & !verification_line %in% "Yes" & longterm_line %in% "Yes" & !recency_interpretation %in% "Invalid"
-        ),
+      ),
       "Viral load requested" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &

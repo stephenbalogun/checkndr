@@ -1,4 +1,3 @@
-
 #' Start the HTS Data Quality Checker App
 #'
 #' @param .theme customise the appearance of your Shiny app. This can be done using the `bslib::bs_theme()` function.
