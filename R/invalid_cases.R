@@ -31,7 +31,7 @@ invalid_cases <- function(df) {
         control_line %in% "Yes" & !verification_line %in% "Yes" & longterm_line %in% "Yes" & !recency_interpretation %in% "Invalid" |
         control_line %in% "Yes" & verification_line %in% "Yes" & !longterm_line %in% "Yes" & !viral_load_requested %in% "Yes" |
         control_line %in% "Yes" & verification_line %in% "yes" & !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" & is.na(date_sample_collected) |
-        control_line %in% "Yes" & verification_line %in% "Yes" & !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" & visit_date < max(visit_date, na.rm = TRUE) - lubridate::days(42) & is.na(date_of_viral_load_result)
+        control_line %in% "Yes" & verification_line %in% "Yes" & !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" & visit_date < max(visit_date, na.rm = TRUE) - lubridate::days(28) & is.na(date_of_viral_load_result)
     )
 }
 
