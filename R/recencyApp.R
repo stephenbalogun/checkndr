@@ -63,6 +63,7 @@ recencyApp <- function(.theme = NULL) {
   options(shiny.maxRequestSize = 500 * 1024^2)
 
   ui <- shiny::fluidPage(
+    shinyFeedback::useShinyFeedback(),
     theme = .theme %||% default_theme(),
     shiny::titlePanel("Recency Data Quality Checker"),
     checkerUI(

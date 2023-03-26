@@ -30,6 +30,7 @@ Imports:
     readxl,
     scales,
     shiny,
+    shinyFeedback,
     shinyWidgets,
     stringr,
     summaryBox (>= 0.1.0),
