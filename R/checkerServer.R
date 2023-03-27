@@ -25,7 +25,7 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
         shinyFeedback::feedbackDanger(
           "upload",
           !ext %in% c("csv", "xlsx"), "Please supply a line-list with csv or xlsx extension"
-          )
+        )
 
         load_file(input$upload$name, input$upload$datapath, var_names)
       })
@@ -57,7 +57,6 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       # Populate choices of states --------------------------------------------------------------------------------------------
 
       shiny::observeEvent(input$partner, {
-
         states <- sort(as.character(unique(partners()[[state_var]])))
 
         lgas <- sort(as.character(unique(partners()[[lga_var]])))
@@ -81,7 +80,6 @@ checkerServer <- function(id, date_var, partner_var, state_var, lga_var, facilit
       # Populate choices of LGAs ------------------------------------------------------------------------------------------------
 
       shiny::observeEvent(input$state, {
-
         lgas <- sort(unique(as.character(states()[[lga_var]])))
 
         facilities <- sort(as.character(unique(states()[[facility_var]])))

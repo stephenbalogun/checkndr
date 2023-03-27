@@ -40,18 +40,27 @@ recency_line_list <- function(df, input) {
       ),
       "Screening result" = subset(
         df,
-        !hts_result %in% c("R", "Pos")
+        !hts_screening_result %in% c("R", "Pos")
       ),
       "Confirmatory test" = subset(
         df,
-        hts_result %in% c("R", "Pos") &
-          !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid")
+        !hts_confirmatory_result %in% c("R", "Pos", "NR", "Neg", "Invalid")
       ),
       "Tie breaker" = subset(
         df,
-        hts_result %in% c("R", "Pos") &
-          hts_confirmatory_result %in% c("NR", "Neg") &
+        hts_confirmatory_result %in% c("NR", "Neg") &
           !hts_tie_breaker_result %in% c("R", "Pos")
+      ),
+      "HTS result interpretation" = subset(
+        df,
+        hts_result %in% c("Pos", "POS", "pos") &
+          hts_screening_result %in% c("R", "Pos") +
+            hts_confirmatory_result %in% c("R", "Pos") +
+            hts_tie_breaker_result %in% c("R", "Pos") < 2 |
+          hts_result %in% c("Neg", "NEG", "neg") &
+            hts_screening_result %in% c("R", "Pos") +
+              hts_confirmatory_result %in% c("R", "Pos") +
+              hts_tie_breaker_result %in% c("R", "Pos") >= 2
       ),
       "Testing point" = subset(
         df,
@@ -155,6 +164,7 @@ utils::globalVariables(
     "age",
     "visit_date",
     "hts_result",
+    "hts_screening_result",
     "hts_confirmatory_result",
     "hts_tie_breaker_result",
     "testing_point",
