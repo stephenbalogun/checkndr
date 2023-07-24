@@ -76,7 +76,11 @@ dqa_recency <- function(df) {
 
   obs_vl_sample <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & is.na(df$date_sample_collected), na.rm = TRUE)} clients were identified as 'Recent' but did not have their date of sample colllection documented")
 
-  obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$recency_test_date < max(df$recency_test_date, na.rm = TRUE) - lubridate::days(28) & is.na(df$date_of_viral_load_result), na.rm = TRUE)} clients with RTRI_RECENT results were identified over 4 weeks ago but are still without viral load result")
+  obs_vl_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$recency_test_date < max(df$recency_test_date, na.rm = TRUE) - lubridate::days(28) & is.na(df$viral_load_result), na.rm = TRUE)} clients with RTRI_RECENT results were identified over 4 weeks ago but are still without viral load result")
+
+  obs_no_vl_result_date <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$recency_test_date < max(df$recency_test_date, na.rm = TRUE) - lubridate::days(28) & !is.na(df$viral_load_result) & is.na(df$date_of_viral_load_result), na.rm = TRUE)} clients with RTRI_RECENT results identified over 4 weeks and have documented viral load result but no viral load result date")
+
+  obs_wrong_final_recency_result <- glue::glue("{sum(df$control_line %in% 'Yes' & df$verification_line %in% 'Yes' & !df$longterm_line %in% 'Yes' & df$viral_load_requested %in% 'Yes' & df$recency_test_date < max(df$recency_test_date, na.rm = TRUE) - lubridate::days(28) & !is.na(df$viral_load_result) & (df$viral_load_result < 1000 & df$final_recency_result %in% 'RitaRecent' | !df$final_recency_result %in% 'RitaRecent' & df$viral_load_result >= 1000), na.rm = TRUE)} clients with RTRI_RECENT and viral load results but with wrong final recency interpretation")
 
   obs_partial_duplicates <- glue::glue("{nrow(df |>  janitor::get_dupes(sex, date_of_birth, facility, visit_date))} entries are at least partially duplicated with the same 'sex', 'date_of_birth', 'facility', 'visit_date' and 'HIV status'")
 
@@ -94,10 +98,12 @@ dqa_recency <- function(df) {
     "Interpreted long-term", obs_interpretation_longterm,
     "Interpreted recent", obs_interpretation_recent,
     "Interpreted negative", obs_interpretation_negative,
-    "Interpreted invalid", obs_interpretation_invalid,
+    "Invalid entries", obs_interpretation_invalid,
     "Viral load requested", obs_vl_request,
     "Viral load sample date", obs_vl_sample,
     "Viral load results", obs_vl_result,
+    "No viral load result date", obs_no_vl_result_date,
+    "Wrong final recency result", obs_wrong_final_recency_result,
     "Partial duplicates", obs_partial_duplicates
   )
 }

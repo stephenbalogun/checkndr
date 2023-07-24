@@ -22,6 +22,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Kehinde Balogun [contributor]
+  \item Eniola Erubami [contributor]
 }
 
 }

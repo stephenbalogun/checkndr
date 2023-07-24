@@ -21,8 +21,9 @@ opts_two <- function() {
   c(
     "Opt out", "Recency test name", "Recency test date", "Recency test before visit date",
     "Recency number", "Invalid recency number", "Control line", "Verification line", "Longterm line",
-    "Interpreted longterm", "Interpreted recent", "Interpreted negative", "Interpreted invalid",
-    "Viral load requested", "VL sample collection date", "Viral load result", "Partial duplicates"
+    "Interpreted longterm", "Interpreted recent", "Interpreted negative", "Invalid entries",
+    "Viral load requested", "VL sample collection date", "Viral load result", "No viral load result date",
+    "Wrong final recency result", "Partial duplicates"
   )
 }
 
@@ -60,8 +61,9 @@ hts_download_opts <- function() {
     "Session type", "Referred from", "Marital status", "Children under five", "Screening result", "Confirmatory test",
     "Tie breaker", "Testing point", "Recency test", "Recency number", "HTS setting", "Consent",
     "Control line", "Verification line", "Longterm line", "Interpreted longterm", "Interpreted recent",
-    "Post test counseling", "Interpreted negative", "Interpreted invalid", "Recency result", "Recency interpretation",
-    "Viral load requested", "Date sample collected", "Date sample sent", "Viral load result", "Partial duplicates"
+    "Post test counseling", "Interpreted negative", "Invalid entries", "Recency result", "Recency interpretation",
+    "Viral load requested", "Date sample collected", "Date sample sent", "Viral load result",
+    "Wrong final recency result", "Partial duplicates"
   )
 }
 

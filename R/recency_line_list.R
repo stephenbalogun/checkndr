@@ -119,7 +119,7 @@ recency_line_list <- function(df, input) {
         control_line %in% "Yes" & !verification_line %in% "Yes" & !longterm_line %in% "Yes" &
           !recency_interpretation %in% "Negative"
       ),
-      "Interpreted invalid" = subset(
+      "Invalid entries" = subset(
         df,
         recency_test_name %in% c("Asante", "AS") &
           !control_line %in% "Yes" & !recency_interpretation %in% "Invalid" |
@@ -143,8 +143,26 @@ recency_line_list <- function(df, input) {
         recency_test_name %in% c("Asante", "AS") &
           control_line %in% "Yes" & verification_line %in% "Yes" &
           !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
-          recency_test_date < max(recency_test_date, na.rm = TRUE) - 28 & is.na(date_of_viral_load_result)
+          recency_test_date < max(recency_test_date, na.rm = TRUE) - 28 & is.na(viral_load_result)
       ),
+      "No viral load result date" = subset(
+        df,
+        recency_test_name %in% c("Asante", "AS") &
+          control_line %in% "Yes" & verification_line %in% "Yes" &
+          !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
+          recency_test_date < max(recency_test_date, na.rm = TRUE) - 28 & !is.na(viral_load_result) & is.na(date_of_viral_load_result)
+      ),
+      "Wrong final recency result" = subset(
+        df,
+        recency_test_name %in% c("Asante", "AS") &
+          control_line %in% "Yes" & verification_line %in% "Yes" &
+          !longterm_line %in% "Yes" & viral_load_requested %in% "Yes" &
+          recency_test_date < max(recency_test_date, na.rm = TRUE) - 28
+      ) |>
+        subset(
+          viral_load_result < 1000 & final_recency_result %in% "RitaRecent" |
+            !final_recency_result %in% "RitaRecent" & viral_load_result >= 1000
+        ),
       "Partial duplicates" = janitor::get_dupes(df, sex, date_of_birth, facility, visit_date)
     )
   }
@@ -177,6 +195,8 @@ utils::globalVariables(
     "recency_interpretation",
     "viral_load_requested",
     "date_sample_collected",
-    "date_of_viral_load_result"
+    "viral_load_result",
+    "date_of_viral_load_result",
+    "final_recency_result"
   )
 )
